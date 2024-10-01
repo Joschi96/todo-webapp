@@ -13,7 +13,7 @@ module.exports = {
   devServer: {
     static: './dist',
     open: true, // automatically opens the browser
-    watchFiles: ["./src/index.html", "./src/index.js", "./src/styles.css"], // watches these files for changes
+    watchFiles: ["./src/index.html", "./src/index.js", "./src/styles/styles.css"], // watches these files for changes
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -25,6 +25,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
+      },
+      {
+        "jest": {
+          "transform": {
+            "^.+\\.jsx?$": "babel-jest"
+          }
+        }
       },
     ],
   },
