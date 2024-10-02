@@ -23,6 +23,8 @@
     "webpack-dev-server": "^4.0.0"
   },
   "dependencies": {
-    "modern-normalize": "^3.0.1"
+    "localStorage": "^1.0.4",
+    "modern-normalize": "^3.0.1",
+    "node-localstorage": "^3.0.5"
   }
 }
