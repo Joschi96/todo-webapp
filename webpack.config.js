@@ -26,13 +26,6 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-      {
-        "jest": {
-          "transform": {
-            "^.+\\.jsx?$": "babel-jest"
-          }
-        }
-      },
     ],
   },
 };

@@ -26,5 +26,10 @@
     "localStorage": "^1.0.4",
     "modern-normalize": "^3.0.1",
     "node-localstorage": "^3.0.5"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }
