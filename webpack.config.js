@@ -13,7 +13,7 @@ module.exports = {
   devServer: {
     static: './dist',
     open: true, // automatically opens the browser
-    watchFiles: ["./src/index.html", "./src/index.js", "./src/styles/styles.css"], // watches these files for changes
+    watchFiles: ["./src/index.html", "./src/index.js", "./src/styles/styles.css", "./src/stlyes/components.css"], // watches these files for changes
   },
   plugins: [
     new HtmlWebpackPlugin({
