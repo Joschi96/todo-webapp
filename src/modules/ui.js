@@ -28,11 +28,11 @@ export function renderNavBar() {
     navBar.appendChild(impressum);
 
     navBtnGroup.innerHTML=`
-        <button id="all-btn" class="nav-btn"><span class="material-symbols-rounded">calendar_month</span>All</button>
-        <button id="today-btn" class="nav-btn"><span class="material-symbols-rounded">today</span>Today</button>
-        <button id="week-btn" class="nav-btn"><span class="material-symbols-rounded">date_range</span>This week</button>
-        <button id="important-btn" class="nav-btn"><span class="material-symbols-rounded">assignment_late</span>Important</button>
-        <button id="completed-btn" class="nav-btn"><span class="material-symbols-rounded">event_available</span>Completed</button>
+        <button id="all-btn" class="nav-btn" data-title="all"><span class="material-symbols-rounded">calendar_month</span>All</button>
+        <button id="today-btn" class="nav-btn" data-title="today"><span class="material-symbols-rounded">today</span>Today</button>
+        <button id="week-btn" class="nav-btn" data-title="week"><span class="material-symbols-rounded">date_range</span>This week</button>
+        <button id="important-btn" class="nav-btn" data-title="important"><span class="material-symbols-rounded">assignment_late</span>Important</button>
+        <button id="completed-btn" class="nav-btn" data-title="completed"><span class="material-symbols-rounded">event_available</span>Completed</button>
     `;
 
     navListGroup.innerHTML=`
