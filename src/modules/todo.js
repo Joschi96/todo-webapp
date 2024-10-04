@@ -6,50 +6,50 @@ import lists from './list.js';
 
 const todos = (() => {
   class Todo {
-    constructor(title, description, dueDate, important, listId, todoId) {
+    constructor(title, description, dueDate, important, listIndex, todoIndex) {
       this.title = title;
       this.description = description;
       this.dueDate = dueDate;
       this.important = important;
-      this.listId = listId;
-      this.todoId = todoId;
+      this.listIndex = listIndex;
+      this.todoIndex = todoIndex;
       this.isComplete = false;
     }
   }
 
-  function addTodo(title, description, dueDate, important, listId, todoId) {
+  function addTodo(title, description, dueDate, important, listIndex, todoIndex) {
     // logic to add todo item
-    const todo = new Todo(title, description, dueDate, important, listId, todoId);
+    const todo = new Todo(title, description, dueDate, important, listIndex, todoIndex);
 
-    lists.listsArray[listId].todos.push(todo);
-    dom.getTodos('list-card', listId);
+    lists.listsArray[listIndex].todos.push(todo);
+    dom.getTodos('list-card', listIndex);
   }
 
-  function editTodo(title, description, dueDate, important, listId, todoId) {
+  function editTodo(title, description, dueDate, important, listIndex, todoIndex) {
     // logic to edit todo item
-    lists.listsArray[listId].todos[todoId].title = title;
-    lists.listsArray[listId].todos[todoId].description = description;
-    lists.listsArray[listId].todos[todoId].dueDate = dueDate;
-    lists.listsArray[listId].todos[todoId].important = important;
-    dom.getTodos('list-card', listId);
+    lists.listsArray[listIndex].todos[todoIndex].title = title;
+    lists.listsArray[listIndex].todos[todoIndex].description = description;
+    lists.listsArray[listIndex].todos[todoIndex].dueDate = dueDate;
+    lists.listsArray[listIndex].todos[todoIndex].important = important;
+    dom.getTodos('list-card', listIndex);
   }
 
-  function deleteTodo(listId, todoId) {
+  function deleteTodo(listIndex, todoIndex) {
     // logic to delete todo item
-    if(todoId > -1) {
-      lists.listsArray[listId].todos.splice(todoId, 1);
+    if(todoIndex > -1) {
+      lists.listsArray[listIndex].todos.splice(todoIndex, 1);
       dom.getTodos('all');
     }
   }
 
-  function toggleComplete(listId, todoId, selectedTab) {
+  function toggleComplete(listIndex, todoIndex, selectedTab) {
     // logic to toggle completion status
     let clickedTab;
 
-    if(lists.listsArray[listId].todos[todoId].isComplete === false) {
-      lists.listsArray[listId].todos[todoId].isComplete = true;
+    if(lists.listsArray[listIndex].todos[todoIndex].isComplete === false) {
+      lists.listsArray[listIndex].todos[todoIndex].isComplete = true;
     } else {
-      lists.listsArray[listId].todos[todoId].isComplete = false;
+      lists.listsArray[listIndex].todos[todoIndex].isComplete = false;
     }
 
     if(selectedTab.classList.contains('list-card')) {
@@ -58,7 +58,7 @@ const todos = (() => {
       clickedTab = selectedTab.getAttribute('id');
     }
 
-    dom.getTodos(clickedTab, listId);
+    dom.getTodos(clickedTab, listIndex);
   }
 
   function markImportant() {
