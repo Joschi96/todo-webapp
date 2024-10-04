@@ -1,37 +1,10 @@
 // Manage collections of todo items
 import dom from './ui.js';
+import { loadData } from './storage.js';
 
 const lists = (() => {
   let listsArray = [];
-
-  if(localStorage.getItem('lists') === null) {
-    listsArray = [
-      {
-        title: 'My Tasks',
-        todos: [
-          {
-            title: 'Task 1',
-            description: 'Description of task 1',
-            dueDate: '2021-07-01',
-            important: false,
-            isComplete: false,
-            projectId: 0
-          },
-          {
-            title: 'Task 2',
-            description: 'Description of task 2',
-            dueDate: '2021-07-02',
-            important: true,
-            isComplete: false,
-            projectId: 0
-          }
-        ]
-      }
-    ];
-  } else {
-    const listsFromStorage = JSON.parse(localStorage.getItem('lists'));
-    listsArray = listsFromStorage;
-  }
+  listsArray = loadData('lists');
 
   class List {
     constructor(title) {
@@ -53,7 +26,7 @@ const lists = (() => {
     dom.showLists();
   }
 
-  function editList(listIndex, title) {
+  function editListTitle(listIndex, title) {
     listsArray[listIndex].title = title;
     dom.showLists();
   }
@@ -62,7 +35,7 @@ const lists = (() => {
     listsArray,
     addList,
     deleteList,
-    editList,
+    editListTitle,
   };
 })();
 

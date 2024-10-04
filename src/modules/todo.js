@@ -20,6 +20,7 @@ const todos = (() => {
   function addTodo(title, description, dueDate, important, listId, todoId) {
     // logic to add todo item
     const todo = new Todo(title, description, dueDate, important, listId, todoId);
+
     lists.listsArray[listId].todos.push(todo);
     dom.getTodos('list-card', listId);
   }
@@ -56,6 +57,8 @@ const todos = (() => {
     } else {
       clickedTab = selectedTab.getAttribute('id');
     }
+
+    dom.getTodos(clickedTab, listId);
   }
 
   function markImportant() {
@@ -71,4 +74,4 @@ const todos = (() => {
   };
 })();
 
-export default todo;
+export default todos;
