@@ -68,7 +68,3 @@ export function renderMainContent() {
     `;
     document.body.appendChild(mainContent);
 }
-
-// export function updateHeader(title) {
-//     document.querySelector('h1 main-content-header').textContent = title;
-// }

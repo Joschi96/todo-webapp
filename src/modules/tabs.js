@@ -5,7 +5,3 @@ export function renderStaticUi() {
     renderNavBar();
     renderMainContent();
 }
-
-export function renderDynamicUi() {
-    // render dynamic ui components ()
-}
