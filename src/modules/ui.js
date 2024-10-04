@@ -7,15 +7,11 @@ const dom = (() => {
     const navBar = document.createElement('nav');
     const mainContent = document.createElement('main');
 
-    function renderHeader() {
+    function initializeHtml() {
         header.innerHTML=`
             <span class="material-symbols-rounded">done_all</span>
             <h1 id="title">Todo List</h1>
-            `;
-        document.body.insertBefore(header, document.body.firstChild);
-    }
-
-    function renderNavBar() {
+        `; 
         navBar.innerHTML=`
             <div class="nav-btn-group">
                 <button id="all-btn" class="nav-btn" data-title="all"><span class="material-symbols-rounded">calendar_month</span>All</button>
@@ -28,27 +24,23 @@ const dom = (() => {
                 <div class="lists-header">
                     <h1>Lists</h1>
                     <button type="button" id="add-btn"><span class="material-symbols-rounded" id="add-icon">
-                      playlist_add
-                      </span></button>
+                        playlist_add
+                        </span></button>
                 </div>
                 <div class="list-card-container">
                     <!--
                     <div class="list-card">
                         <div class="list-name">My tasks</div>
                         <button id="edit-btn"><span class="material-symbols-rounded" id="edit-icon">
-                        edit_note
-                        </span></button>
+                            edit_note
+                            </span></button>
                     </div> -->
                 </div>
             </div>
             <div class="impressum">
                 created by <a href="https://github.com/Joschi96">Joschi96</a> | <a href="https://github.com/Joschi96">Source</a>
             </div>
-                `;
-        document.body.appendChild(navBar);
-    }
-
-    function renderMainContent() {
+        `;   
         mainContent.innerHTML=`
             <div class="main-content">
                 <div class="main-content-header">
@@ -60,13 +52,13 @@ const dom = (() => {
                 </div>
             </div>
         `;
+        document.body.insertBefore(header, document.body.firstChild);
+        document.body.appendChild(navBar);
         document.body.appendChild(mainContent);
     }
 
     return {
-        renderHeader,
-        renderNavBar,
-        renderMainContent,
+        initializeHtml,
     };
 })();
 
