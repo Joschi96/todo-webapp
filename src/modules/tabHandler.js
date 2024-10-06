@@ -6,33 +6,29 @@ const activeTab = (() => {
     let activeTab = 'all';
 
     function setActiveTab(tab) {
-        const filterTabs = document.querySelectorAll('.nav-btn');
-        const listTabs = document.querySelectorAll('.list-name');
-        const listCards = document.querySelectorAll('.list-card');
+        const selectableTabs = document.querySelectorAll('.list-name, .nav-btn.tab');
+        //const listTabs = document.querySelectorAll('.list-name');
+        //const listCards = document.querySelectorAll('.list-card');
+        const mainContentHeader = document.querySelector('.main-content-header').firstElementChild;
 
-        filterTabs.forEach((tab) => {
+        selectableTabs.forEach((tab) => {
+            if (tab.classList.contains('list-name')) {
+            tab.closest('.list-card').classList.remove('active');
+            }
             tab.classList.remove('active');
         });
-        listCards.forEach((tab) => {
-            tab.classList.remove('active');
-        });
+
 
         activeTab = tab;
 
-        filterTabs.forEach((tab) => {
-            if(tab.getAttribute('data-title') === activeTab) {
-                tab.classList.add('active');
+        selectableTabs.forEach((tab) => {
+            if (tab.getAttribute('data-title') === activeTab) {
+            tab.classList.add('active');
+            }
+            if (tab.classList.contains('list-name') && tab.textContent === activeTab) {
+            tab.closest('.list-card').classList.add('active');
             }
         });
-        listTabs.forEach((tab) => {
-            if(tab.textContent === activeTab) {
-            const listCard = tab.closest('.list-card');
-            if (listCard) {
-                listCard.classList.add('active');
-            }
-            }
-        });
-
         saveData('lists', lists.listsArray);
         //dom.getTodos(activeTab);
     }

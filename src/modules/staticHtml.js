@@ -11,11 +11,11 @@ const staticHtml =(() => {
         `; 
         navBar.innerHTML=`
             <div class="nav-btn-group">
-                <button id="all-btn" class="nav-btn active" data-title="all"><span class="material-symbols-rounded">calendar_month</span>All</button>
-                <button id="today-btn" class="nav-btn" data-title="today"><span class="material-symbols-rounded">today</span>Today</button>
-                <button id="week-btn" class="nav-btn" data-title="week"><span class="material-symbols-rounded">date_range</span>This week</button>
-                <button id="important-btn" class="nav-btn" data-title="important"><span class="material-symbols-rounded">assignment_late</span>Important</button>
-                <button id="completed-btn" class="nav-btn" data-title="completed"><span class="material-symbols-rounded">event_available</span>Completed</button>
+                <button id="all-btn" class="nav-btn tab active" data-title="all"><span class="material-symbols-rounded">calendar_month</span>All</button>
+                <button id="today-btn" class="nav-btn tab" data-title="today"><span class="material-symbols-rounded">today</span>Today</button>
+                <button id="week-btn" class="nav-btn tab" data-title="week"><span class="material-symbols-rounded">date_range</span>This week</button>
+                <button id="important-btn" class="nav-btn tab" data-title="important"><span class="material-symbols-rounded">assignment_late</span>Important</button>
+                <button id="completed-btn" class="nav-btn tab" data-title="completed"><span class="material-symbols-rounded">event_available</span>Completed</button>
             </div>
             <div class="nav-list-group">
                 <div class="lists-header">
