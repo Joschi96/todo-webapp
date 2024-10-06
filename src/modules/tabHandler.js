@@ -1,13 +1,19 @@
+import  dom  from './ui.js';
+import { saveData, loadData } from './storage.js';
+import  lists  from './list.js';
+
 const activeTab = (() => {
     let activeTab = 'all';
 
     function setActiveTab(tab) {
-        const filterTabs = document.querySelectorAll('.nav-btn').getAttribute('data-title');
-        const listTabs = document.querySelectorAll('.list-name').textContent;
+        const filterTabs = document.querySelectorAll('.nav-btn');
+        const listTabs = document.querySelectorAll('.list-name');
+        const listCards = document.querySelectorAll('.list-card');
+
         filterTabs.forEach((tab) => {
             tab.classList.remove('active');
         });
-        listTabs.forEach((tab) => {
+        listCards.forEach((tab) => {
             tab.classList.remove('active');
         });
 
@@ -20,11 +26,15 @@ const activeTab = (() => {
         });
         listTabs.forEach((tab) => {
             if(tab.textContent === activeTab) {
-                tab.classList.add('active');
+            const listCard = tab.closest('.list-card');
+            if (listCard) {
+                listCard.classList.add('active');
+            }
             }
         });
 
-        dom.getTodos(activeTab);
+        saveData('lists', lists.listsArray);
+        //dom.getTodos(activeTab);
     }
 
     function getActiveTab() {
@@ -36,3 +46,5 @@ const activeTab = (() => {
         getActiveTab,
     };
 })();
+
+export default activeTab;

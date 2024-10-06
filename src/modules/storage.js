@@ -5,31 +5,8 @@ export const saveData = (key, data) => {
 
 // Retrieve data from local storage
 export const loadData = (key) => {
-    const data = localStorage.getItem(key);
-    if(data !== null) return JSON.parse(data) 
-        else return [
-        {
-          title: 'My Tasks',
-          todos: [
-            {
-              title: 'Task 1',
-              description: 'Description of task 1',
-              dueDate: '2021-07-01',
-              important: false,
-              isComplete: false,
-              projectIndex: 0
-            },
-            {
-              title: 'Task 2',
-              description: 'Description of task 2',
-              dueDate: '2021-07-02',
-              important: true,
-              isComplete: false,
-              projectIndex: 0
-            }
-          ]
-        }
-      ];
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : null;
 };
 
 
