@@ -3,6 +3,7 @@ import lists from './list';
 import todos from './todo';
 
 const dom = (() => {
+
     function showLists() {
         const listsContainer = document.querySelector('.list-card-container');
         listsContainer.innerHTML = '';

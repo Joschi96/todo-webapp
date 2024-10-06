@@ -16,7 +16,12 @@ const eventHandler = (() => {
         const listCards = document.querySelectorAll('.list-card');
         listCards.forEach((card) => {
             card.addEventListener('click', () => {
-                activeTab.setActiveTab(card.querySelector('.list-name').textContent);
+                const listNameElement = card.querySelector('.list-name');
+                const listNameText = Array.from(listNameElement.childNodes)
+                    .filter(node => node.nodeType === Node.TEXT_NODE)
+                    .map(node => node.textContent.trim())
+                    .join(' ');
+                activeTab.setActiveTab(listNameText);
             });
         });
     }
