@@ -1,19 +1,15 @@
 import activeTab from './tabHandler.js';
 
 const eventHandler = (() => {
-    // Add event listener to tabswitching buttons "nav-btn"
+    // Add event listener to tabswitching buttons
     function addTabSwitchingEvent() {
         const filterTabs = document.querySelectorAll('.nav-btn');
+        const listCards = document.querySelectorAll('.list-card');
         filterTabs.forEach((tab) => {
             tab.addEventListener('click', () => {
                 activeTab.setActiveTab(tab.getAttribute('data-title'));
             });
         });
-    }
-
-    // Add event listener to list cards "list-card"
-    function addListCardEvent() {
-        const listCards = document.querySelectorAll('.list-card');
         listCards.forEach((card) => {
             card.addEventListener('click', () => {
                 const listNameElement = card.querySelector('.list-name');
@@ -26,9 +22,9 @@ const eventHandler = (() => {
         });
     }
 
+
     return {
         addTabSwitchingEvent,
-        addListCardEvent,
     };
 
 })();

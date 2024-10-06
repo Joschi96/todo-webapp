@@ -16,5 +16,4 @@ dom.showLists();
 
 
 eventHandler.addTabSwitchingEvent();
-eventHandler.addListCardEvent();
 activeTab.setActiveTab('all');
