@@ -44,7 +44,10 @@ const dom = (() => {
             });
         } else if (tab === 'week') {
             lists.listsArray.forEach(list => {
-                filteredTodos = filteredTodos.concat(list.todos.filter(todo => differenceInDays(parseISO(todo.dueDate), new Date()) <= 7));
+            filteredTodos = filteredTodos.concat(list.todos.filter(todo => {
+                const daysDifference = differenceInDays(parseISO(todo.dueDate), new Date());
+                return daysDifference >= 0 && daysDifference <= 7;
+            }));
             });
         } else if (tab === 'important') {
             lists.listsArray.forEach(list => {

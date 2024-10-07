@@ -44,21 +44,13 @@ const todos = (() => {
 
   function toggleComplete(listIndex, todoIndex, selectedTab) {
     // logic to toggle completion status
-    let clickedTab;
-
     if(lists.listsArray[listIndex].todos[todoIndex].isComplete === false) {
       lists.listsArray[listIndex].todos[todoIndex].isComplete = true;
     } else {
       lists.listsArray[listIndex].todos[todoIndex].isComplete = false;
     }
 
-    if(selectedTab.classList.contains('list-card')) {
-      clickedTab = 'list-card';
-    } else {
-      clickedTab = selectedTab.getAttribute('id');
-    }
-
-    dom.getTodos(clickedTab, listIndex);
+    dom.showTodos(selectedTab);
   }
 
   function markImportant() {
