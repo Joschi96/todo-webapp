@@ -28,38 +28,67 @@ const dom = (() => {
         });
     }
 
-    function showTodos(tab, listIndex) {
+    function showTodos(tab) {
         const todoList = document.querySelector('.todo-list');
         todoList.innerHTML = '';
-        const selectedList = lists.listsArray[listIndex];
-        selectedList.todos.forEach((todo, index) => {
-            const todoItem = document.createElement('div');
-            todoItem.classList.add('todo-item');
-            todoItem.setAttribute('data-index', index);
-            if (tab === 'all' || tab === 'list-card') {
-                todoItem.innerHTML = `
-                <div class="todo-header">
-                    <div class="todo-title">${todo.title}</div>
-                    <div class="todo-due-date">${format(parseISO(todo.dueDate), 'dd/MM/yyyy')}</div>
-                </div>
-            `;
-            } else if (tab === 'today') {
-                if (differenceInDays(parseISO(todo.dueDate), new Date()) === 0) {
-                    todoItem.innerHTML = `
-                    <div class="todo-header">
-                        <div class="todo-title">${todo.title}</div>
-                        <div class="todo-due-date">${format(parseISO(todo.dueDate), 'dd/MM/yyyy')}</div>
-                    </div>
-                `;
-                }
+
+        let filteredTodos = [];
+
+        if (tab === 'all') {
+            lists.listsArray.forEach(list => {
+                filteredTodos = filteredTodos.concat(list.todos);
+            });
+        } else if (tab === 'today') {
+            lists.listsArray.forEach(list => {
+                filteredTodos = filteredTodos.concat(list.todos.filter(todo => differenceInDays(parseISO(todo.dueDate), new Date()) === 0));
+            });
+        } else if (tab === 'week') {
+            lists.listsArray.forEach(list => {
+                filteredTodos = filteredTodos.concat(list.todos.filter(todo => differenceInDays(parseISO(todo.dueDate), new Date()) <= 7));
+            });
+        } else if (tab === 'important') {
+            lists.listsArray.forEach(list => {
+                filteredTodos = filteredTodos.concat(list.todos.filter(todo => todo.important));
+            });
+        } else if (tab === 'completed') {
+            lists.listsArray.forEach(list => {
+                filteredTodos = filteredTodos.concat(list.todos.filter(todo => todo.isComplete));
+            });
+        } else {
+            const selectedList = lists.listsArray.find(list => list.title === tab);
+            if (selectedList) {
+                filteredTodos = selectedList.todos;
             }
-            todoList.appendChild(todoItem);
         }
-        );}
+
+        filteredTodos.forEach((todo, index) => {
+            const todoCard = document.createElement('div');
+            todoCard.classList.add('todo-card');
+            todoCard.setAttribute('data-index', index);
+            todoCard.innerHTML = `
+            <button id="mark-important"><span class="material-symbols-rounded" id=${todo.important ? "important-icon" : "important-icon-empty"}>priority_high</span></button>
+            <div class="todo-card-title-container">
+                <input type="checkbox" id="todo-checkbox" ${todo.isComplete ? 'checked' : ''}></input>
+                <h3 class = "todo-title">${todo.title}</h3>
+            </div>
+            <div class="due-date-container">${format(parseISO(todo.dueDate), 'dd/MM/yyyy')}</div>
+            <div class="todo-card-button-container">
+                <button id="edit-btn"><span class="material-symbols-rounded" id="edit-icon">drive_file_rename_outline</span></button>
+                <button id="delete-btn"><span class="material-symbols-rounded" id="delete-icon">delete_outline</span></button>
+                <button id="details-btn"><span class="material-symbols-rounded" id="details-icon">info</span></button>
+            </div>`;
+            const todoTitle = todoCard.querySelector('.todo-title');
+            if (todo.isComplete) {
+                todoTitle.style.textDecoration = 'line-through';
+            }
+            todoList.appendChild(todoCard);
+        });
+    }
         
 
     return {
         showLists,
+        showTodos,
     };
 })();
 

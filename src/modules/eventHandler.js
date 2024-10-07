@@ -22,9 +22,22 @@ const eventHandler = (() => {
         });
     }
 
+    function addToggleCompleteEvent() {
+        //const todoCheckbox = document.querySelector('#todo-checkbox');
+        const todoCard = document.querySelector('.todo-card');
+        todoCard.addEventListener('click', (e) => {
+            if (e.target.id === 'todo-checkbox' || e.target.class === 'todo-title') {
+                const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
+                const listIndex = e.target.closest('.list-card').getAttribute('data-index');
+                todos.toggleComplete(listIndex, todoIndex);
+                activeTab.setActiveTab(activeTab.getActiveTab());
+            }
+        });
+    }
 
     return {
         addTabSwitchingEvent,
+        addToggleCompleteEvent,
     };
 
 })();

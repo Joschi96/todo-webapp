@@ -34,7 +34,7 @@ const activeTab = (() => {
     
         updateTabHeader(activeTab);
         saveData('lists', lists.listsArray);
-        //dom.getTodos(activeTab);
+        dom.showTodos(activeTab);
     }
 
     function getActiveTab() {

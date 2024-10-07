@@ -17,7 +17,7 @@ const lists = (() => {
             important: true,
             listIndex: 0,
             todoIndex: 0,
-            isComplete: false
+            isComplete: true
           },
           {
             title: 'Create magic through my mind, my heart and my keyboard.. 👩🏻‍💻',
