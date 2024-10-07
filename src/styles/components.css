@@ -1,3 +1,8 @@
 .list-card {
     cursor: pointer;
 }
+
+header .material-symbols-rounded {
+    margin-left: 1rem;
+    font-variation-settings: 'opsz' 30;
+}

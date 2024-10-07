@@ -9,8 +9,56 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "header header"
+    "nav main";
+  height: 100%;
 }
 
 button {
   cursor: pointer;
+}
+
+header {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  display: flex;
+  font-size: 16px;
+  grid-area: header;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  grid-area: nav;
+}
+
+.nav-btn-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.todo-card {
+  background-color: #f8f8f8;
+  display: flex;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo-card-title-container {
+  display: flex;
+  align-items: center;
+}
+
+.main-content-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5rem 3rem;
 }
