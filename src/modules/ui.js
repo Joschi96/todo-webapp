@@ -1,6 +1,7 @@
 import {format, parseISO, differenceInDays } from 'date-fns';
 import lists from './list';
 import todos from './todo';
+import eventHandler from './eventHandler';
 
 const dom = (() => {
 
@@ -67,7 +68,8 @@ const dom = (() => {
         filteredTodos.forEach((todo, index) => {
             const todoCard = document.createElement('div');
             todoCard.classList.add('todo-card');
-            todoCard.setAttribute('data-index', index);
+            todoCard.setAttribute('data-index', todo.todoIndex);
+            todoCard.setAttribute('data-list-index', todo.listIndex);
             todoCard.innerHTML = `
             <button id="mark-important"><span class="material-symbols-rounded" id=${todo.important ? "important-icon" : "important-icon-empty"}>priority_high</span></button>
             <div class="todo-card-title-container">
@@ -86,6 +88,8 @@ const dom = (() => {
             }
             todoList.appendChild(todoCard);
         });
+        eventHandler.addToggleCompleteEvent();
+        
     }
         
 

@@ -24,7 +24,7 @@ const lists = (() => {
             description: 'Another longer description of my demo task, just to show you this surprisingly nice scrollbar and cute little birdie ϵ( ‘Θ’ )϶♪♫',
             dueDate: '2012-12-12',
             importent: false,
-            listIndex: 1,
+            listIndex: 0,
             todoIndex: 1,
             isComplete: false
           }

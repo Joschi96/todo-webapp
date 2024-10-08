@@ -4,5 +4,6 @@
 
 header .material-symbols-rounded {
     margin-left: 1rem;
+    font-size: 40px;
     font-variation-settings: 'opsz' 30;
 }

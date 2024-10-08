@@ -1,4 +1,5 @@
 import activeTab from './tabHandler.js';
+import todo from './todo.js';
 
 const eventHandler = (() => {
     // Add event listener to tabswitching buttons
@@ -24,15 +25,24 @@ const eventHandler = (() => {
 
     function addToggleCompleteEvent() {
         //const todoCheckbox = document.querySelector('#todo-checkbox');
-        const todoCard = document.querySelector('.todo-card');
-        todoCard.addEventListener('click', (e) => {
+        const todoCard = document.querySelectorAll('.todo-card');
+        todoCard.forEach((card) => {
+            card.addEventListener('click', (e) => {
             if (e.target.id === 'todo-checkbox' || e.target.class === 'todo-title') {
                 const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
-                const listIndex = e.target.closest('.list-card').getAttribute('data-index');
-                todos.toggleComplete(listIndex, todoIndex, activeTab.getActiveTab());
+                const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
+                todo.toggleComplete(listIndex, todoIndex, activeTab.getActiveTab());
             }
+            });
         });
     }
+
+    // function addNewTodoEvent() {
+    //     const addTodoBtn = document.querySelector('#add-todo-btn');
+    //     addTodoBtn.addEventListener('click', () => {
+    //         todo.addTodo();
+    //     });
+    // }
 
     return {
         addTabSwitchingEvent,

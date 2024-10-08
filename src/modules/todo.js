@@ -3,6 +3,7 @@
 
 import dom from './ui.js';
 import lists from './list.js';
+import { loadData, saveData } from './storage.js';
 
 const todos = (() => {
   class Todo {
@@ -44,13 +45,19 @@ const todos = (() => {
 
   function toggleComplete(listIndex, todoIndex, selectedTab) {
     // logic to toggle completion status
-    if(lists.listsArray[listIndex].todos[todoIndex].isComplete === false) {
-      lists.listsArray[listIndex].todos[todoIndex].isComplete = true;
+    if (lists.listsArray[listIndex] && lists.listsArray[listIndex].todos[todoIndex]) {
+      if (lists.listsArray[listIndex].todos[todoIndex].isComplete === false) {
+        lists.listsArray[listIndex].todos[todoIndex].isComplete = true;
+      } else {
+        lists.listsArray[listIndex].todos[todoIndex].isComplete = false;
+      }
+
+      dom.showTodos(selectedTab);
     } else {
-      lists.listsArray[listIndex].todos[todoIndex].isComplete = false;
+      console.error('Invalid listIndex or todoIndex');
     }
 
-    dom.showTodos(selectedTab);
+    saveData('lists', lists.listsArray);
   }
 
   function markImportant() {
