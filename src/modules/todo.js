@@ -4,6 +4,7 @@
 import dom from './ui.js';
 import lists from './list.js';
 import { loadData, saveData } from './storage.js';
+import activeTab from './tabHandler.js';
 
 const todos = (() => {
   class Todo {
@@ -23,7 +24,8 @@ const todos = (() => {
     const todo = new Todo(title, description, dueDate, important, listIndex, todoIndex);
 
     lists.listsArray[listIndex].todos.push(todo);
-    dom.getTodos('list-card', listIndex);
+    saveData('lists', lists.listsArray);
+    dom.showTodos(activeTab.getActiveTab());
   }
 
   function editTodo(title, description, dueDate, important, listIndex, todoIndex) {
@@ -32,14 +34,16 @@ const todos = (() => {
     lists.listsArray[listIndex].todos[todoIndex].description = description;
     lists.listsArray[listIndex].todos[todoIndex].dueDate = dueDate;
     lists.listsArray[listIndex].todos[todoIndex].important = important;
-    dom.getTodos('list-card', listIndex);
+    saveData('lists', lists.listsArray);
+    dom.showTodos(activeTab.getActiveTab());
   }
 
   function deleteTodo(listIndex, todoIndex) {
     // logic to delete todo item
     if(todoIndex > -1) {
       lists.listsArray[listIndex].todos.splice(todoIndex, 1);
-      dom.getTodos('all');
+      saveData('lists', lists.listsArray);
+      dom.showTodos(activeTab.getActiveTab());
     }
   }
 
@@ -60,8 +64,12 @@ const todos = (() => {
     saveData('lists', lists.listsArray);
   }
 
-  function markImportant() {
+  function markImportant(listIndex, todoIndex) {
     // logic to mark as important
+    lists.listsArray[listIndex].todos[todoIndex].important = !lists.listsArray[listIndex].todos[todoIndex].important;
+
+    saveData('lists', lists.listsArray);
+    dom.showTodos(activeTab.getActiveTab());
   }
 
   return {

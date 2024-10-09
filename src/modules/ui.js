@@ -88,7 +88,7 @@ const dom = (() => {
             }
             todoList.appendChild(todoCard);
         });
-        eventHandler.addToggleCompleteEvent();
+        eventHandler.addTodoCardElementsEvents();
         
     }
         

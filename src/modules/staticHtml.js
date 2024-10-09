@@ -1,9 +1,12 @@
+import eventHandler from "./eventHandler";
+
 const staticHtml =(() => {
     
     function initializeHtml() {
         const header = document.createElement('header');
         const navBar = document.createElement('nav');
         const mainContent = document.createElement('main');
+        const dialog = document.createElement('dialog');
 
         header.innerHTML=`
             <span class="material-symbols-rounded">done_all</span>
@@ -20,7 +23,7 @@ const staticHtml =(() => {
             <div class="nav-list-group">
                 <div class="lists-header">
                     <h1>Lists</h1>
-                    <button type="button" id="add-btn"><span class="material-symbols-rounded" id="add-icon">
+                    <button type="button" id="add-btn" class="add-btn"><span class="material-symbols-rounded" id="add-icon">
                         playlist_add
                         </span></button>
                 </div>
@@ -42,16 +45,25 @@ const staticHtml =(() => {
             <div class="main-content">
                 <div class="main-content-header">
                     <h1>Placeholder for Tab Name</h1>
-                    <button id="add-todo-btn">Add Task <span class="material-symbols-rounded">note_stack_add</span></button>
+                    <button id="add-todo-btn" class="add-btn">Add Task <span class="material-symbols-rounded">note_stack_add</span></button>
                 </div>
                 <div class="todo-list">
                     Placeholder for todo list
                 </div>
             </div>
         `;
+
+        dialog.innerHTML=`
+            <div id = "dialog" class="dialog-content">
+               <!-- Content will be dynamically updated -->
+            </div>
+        `;
+
         document.body.insertBefore(header, document.body.firstChild);
         document.body.appendChild(navBar);
         document.body.appendChild(mainContent);
+        document.body.appendChild(dialog);
+        eventHandler.addStaticElementsEvents();
     }
 
     return {

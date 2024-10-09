@@ -14,6 +14,4 @@ staticHtml.initializeHtml();
 saveData('lists',lists.listsArray);
 dom.showLists();
 
-
-eventHandler.addTabSwitchingEvent();
 activeTab.setActiveTab('all');
