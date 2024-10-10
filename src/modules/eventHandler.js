@@ -2,7 +2,7 @@ import activeTab from './tabHandler.js';
 import todo from './todo.js';
 import dialog from './dialog.js';
 import lists from './list.js';
-import { add } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 const eventHandler = (() => {
 // Add event listener to tabswitching buttons
@@ -108,7 +108,12 @@ const eventHandler = (() => {
             if (e.target.id === 'dialog-cancel-btn') {
                 newDialog.close();
             } else if (e.target.id === 'dialog-add-btn') {
-                todo.addTodo();
+                const title = document.querySelector('#todo-title').value;
+                const description = document.querySelector('#todo-description').value;
+                const dueDate = document.querySelector('#todo-due-date').value;
+                const important = document.querySelector('#todo-important').checked;
+                const listIndex = document.querySelector('#todo-list').value;
+                todo.addTodo(title, description, dueDate, important, listIndex);
                 newDialog.close();
             } else if (e.target.id === 'dialog-edit-btn') {
                 todo.editTodo();

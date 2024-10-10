@@ -82,7 +82,7 @@ const dom = (() => {
                 <input type="checkbox" id="todo-checkbox" ${todo.isComplete ? 'checked' : ''}></input>
                 <h3 class = "todo-title">${todo.title}</h3>
             </div>
-            <div class="due-date-container">${format(parseISO(todo.dueDate), 'dd/MM/yyyy')}</div>
+            <div class="due-date-container">${format(parseISO(todo.dueDate),'dd-MM-yyyy')}</div>
             <div class="todo-card-button-container">
                 <button id="edit-btn"><span class="material-symbols-rounded" id="edit-icon">drive_file_rename_outline</span></button>
                 <button id="delete-btn"><span class="material-symbols-rounded" id="delete-icon">delete_outline</span></button>

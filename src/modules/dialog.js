@@ -1,4 +1,5 @@
 import eventHandler from "./eventHandler";
+import lists from "./list";
 
 // Module to handle dialog functionalities
 const dialog = (() => {
@@ -24,6 +25,10 @@ const dialog = (() => {
             `<input type="text" id="todo-title" placeholder="Title">
             <textarea id="todo-description" placeholder="Description"></textarea>
             <input type="date" id="todo-due-date">
+            <label for="todo-list">List:</label>
+            <select id="todo-list">
+                ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
+            </select>
             <input type="checkbox" id="todo-important">
             <label for="todo-important">Important</label>`,
             [
@@ -38,6 +43,10 @@ const dialog = (() => {
             `<input type="text" id="todo-title" value="${title}">
             <textarea id="todo-description" >${description}</textarea>
             <input type="date" id="todo-due-date" value="${dueDate}">
+            <label for="todo-list">List:</label>
+            <select id="todo-list">
+                ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
+            </select>
             <input type="checkbox" id="todo-important" ${important ? 'checked' : ''}>
             <label for="todo-important">Important</label>`,
             [
