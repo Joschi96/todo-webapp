@@ -7,8 +7,8 @@ import { loadData, saveData } from './storage.js';
 import activeTab from './tabHandler.js';
 
 const todos = (() => {
-  // set initial todoIndexCounter value depending on the length of the loaded todos
-  let todoIndexCounter = 2;
+  
+  const getTodoIndexCounter = (listIndex) => lists.listsArray[listIndex] ? lists.listsArray[listIndex].todos.length : 0;
   
   class Todo {
     constructor(title, description, dueDate, important, listIndex, todoIndex) {
@@ -23,7 +23,7 @@ const todos = (() => {
   }
 
   function addTodo(title, description, dueDate, important, listIndex) {
-    const todoIndex = todoIndexCounter++;
+    const todoIndex = getTodoIndexCounter(listIndex);
     const todo = new Todo(title, description, dueDate, important, listIndex, todoIndex);
 
     lists.listsArray[listIndex].todos.push(todo);
@@ -32,7 +32,6 @@ const todos = (() => {
   }
 
   function editTodo(title, description, dueDate, important, listIndex, todoIndex) {
-    // logic to edit todo item
     lists.listsArray[listIndex].todos[todoIndex].title = title;
     lists.listsArray[listIndex].todos[todoIndex].description = description;
     lists.listsArray[listIndex].todos[todoIndex].dueDate = dueDate;
@@ -42,7 +41,6 @@ const todos = (() => {
   }
 
   function deleteTodo(listIndex, todoIndex) {
-    // logic to delete todo item
     if(todoIndex > -1) {
       lists.listsArray[listIndex].todos.splice(todoIndex, 1);
       for (let i = todoIndex; i < lists.listsArray[listIndex].todos.length; i++) {

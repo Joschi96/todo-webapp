@@ -43,6 +43,10 @@ const lists = (() => {
     }
   }
 
+  function getListLength() {
+    return listsArray.length;
+  }
+
   function addList(title) {
     const list = new List(title);
     listsArray.push(list);
@@ -69,6 +73,7 @@ const lists = (() => {
     addList,
     deleteList,
     editListTitle,
+    getListLength,
   };
 })();
 
