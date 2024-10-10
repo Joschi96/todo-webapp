@@ -2,7 +2,7 @@ import activeTab from './tabHandler.js';
 import todo from './todo.js';
 import dialog from './dialog.js';
 import lists from './list.js';
-import { format, parseISO } from 'date-fns';
+import { format, parse, parseISO } from 'date-fns';
 
 const eventHandler = (() => {
 // Add event listener to tabswitching buttons
@@ -37,7 +37,7 @@ const eventHandler = (() => {
                     const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
                     const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
                     const todo = lists.listsArray[listIndex].todos[todoIndex];
-                    dialog.openEditTodoDialog(todo.title, todo.description, todo.dueDate, todo.important);
+                    dialog.openEditTodoDialog(todo.title, todo.description, todo.dueDate, todo.listIndex,todo.important);
                 } else if (targetButton && targetButton.id === 'delete-btn') {
                     const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
                     const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
@@ -116,7 +116,13 @@ const eventHandler = (() => {
                 todo.addTodo(title, description, dueDate, important, listIndex);
                 newDialog.close();
             } else if (e.target.id === 'dialog-edit-btn') {
-                todo.editTodo();
+                const title = document.querySelector('#todo-title').value;
+                const description = document.querySelector('#todo-description').value;
+                const dueDate = document.querySelector('#todo-due-date').value;
+                const important = document.querySelector('#todo-important').checked;
+                const listIndex = document.querySelector('#todo-list').value;
+                const todoIndex = newDialog.getAttribute('data-index');
+                todo.editTodo(title, description, dueDate, important, listIndex, todoIndex);
                 newDialog.close();
             } else if (e.target.id === 'dialog-edit-list-btn') {
                 const listIndex = newDialog.getAttribute('data-list-index');

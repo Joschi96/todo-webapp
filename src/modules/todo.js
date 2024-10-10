@@ -32,12 +32,22 @@ const todos = (() => {
   }
 
   function editTodo(title, description, dueDate, important, listIndex, todoIndex) {
-    lists.listsArray[listIndex].todos[todoIndex].title = title;
-    lists.listsArray[listIndex].todos[todoIndex].description = description;
-    lists.listsArray[listIndex].todos[todoIndex].dueDate = dueDate;
-    lists.listsArray[listIndex].todos[todoIndex].important = important;
-    saveData('lists', lists.listsArray);
-    dom.showTodos(activeTab.getActiveTab());
+    if (lists.listsArray && lists.listsArray[listIndex] && lists.listsArray[listIndex].todos) {
+      if (lists.listsArray[listIndex].todos[todoIndex]) {
+        lists.listsArray[listIndex].todos[todoIndex].title = title;
+        lists.listsArray[listIndex].todos[todoIndex].description = description;
+        lists.listsArray[listIndex].todos[todoIndex].dueDate = dueDate;
+        lists.listsArray[listIndex].todos[todoIndex].listIndex = listIndex;
+        lists.listsArray[listIndex].todos[todoIndex].important = important;
+  
+        saveData('lists', lists.listsArray);
+        dom.showTodos(activeTab.getActiveTab());
+      } else {
+        console.error(`Todo at index ${todoIndex} is undefined`);
+      }
+    } else {
+      console.error('Invalid listIndex or todos array is undefined');
+    }
   }
 
   function deleteTodo(listIndex, todoIndex) {
