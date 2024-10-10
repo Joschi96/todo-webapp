@@ -7,6 +7,9 @@ import { loadData, saveData } from './storage.js';
 import activeTab from './tabHandler.js';
 
 const todos = (() => {
+  // set initial todoIndexCounter value depending on the length of the loaded todos
+  let todoIndexCounter = 2;
+  
   class Todo {
     constructor(title, description, dueDate, important, listIndex, todoIndex) {
       this.title = title;
@@ -19,8 +22,8 @@ const todos = (() => {
     }
   }
 
-  function addTodo(title, description, dueDate, important, listIndex, todoIndex) {
-    // logic to add todo item
+  function addTodo(title, description, dueDate, important, listIndex) {
+    const todoIndex = todoIndexCounter++;
     const todo = new Todo(title, description, dueDate, important, listIndex, todoIndex);
 
     lists.listsArray[listIndex].todos.push(todo);
@@ -42,6 +45,10 @@ const todos = (() => {
     // logic to delete todo item
     if(todoIndex > -1) {
       lists.listsArray[listIndex].todos.splice(todoIndex, 1);
+      for (let i = todoIndex; i < lists.listsArray[listIndex].todos.length; i++) {
+        lists.listsArray[listIndex].todos[i].todoIndex = i;
+      }
+
       saveData('lists', lists.listsArray);
       dom.showTodos(activeTab.getActiveTab());
     }
