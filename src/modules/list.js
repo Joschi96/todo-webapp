@@ -23,7 +23,7 @@ const lists = (() => {
             title: 'Create magic through my mind, my heart and my keyboard.. 👩🏻‍💻',
             description: 'Another longer description of my demo task, just to show you this surprisingly nice scrollbar and cute little birdie ϵ( ‘Θ’ )϶♪♫',
             dueDate: '2012-12-12',
-            importent: false,
+            important: false,
             listIndex: 0,
             todoIndex: 1,
             isComplete: false

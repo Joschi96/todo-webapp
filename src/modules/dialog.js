@@ -1,3 +1,5 @@
+import eventHandler from "./eventHandler";
+
 // Module to handle dialog functionalities
 const dialog = (() => {
     function openDialog(title, content, buttons) {
@@ -22,7 +24,8 @@ const dialog = (() => {
             [
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
                 { id: 'dialog-add-btn', text: 'Add', type: 'submit' }
-            ]);
+        ]);
+        eventHandler.addDialogButtonsEvents();
     }
 
     function openEditTodoDialog(title, description, dueDate, important) {
@@ -36,6 +39,7 @@ const dialog = (() => {
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
                 { id: 'dialog-edit-btn', text: 'Edit', type: 'submit' }
             ]);
+        eventHandler.addDialogButtonsEvents();
     }
 
     function openShowDetailsDialog(title, description, dueDate, important) {
@@ -47,6 +51,7 @@ const dialog = (() => {
             [
                 { id: 'dialog-cancel-btn', text: 'Close', type: 'button' }
             ]);
+            eventHandler.addDialogButtonsEvents();
     }
 
     function openAddListDialog() {
@@ -54,8 +59,9 @@ const dialog = (() => {
             `<input type="text" id="list-title" placeholder="Title">`,
             [
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
-                { id: 'dialog-add-btn', text: 'Add', type: 'submit' }
+                { id: 'dialog-add-list-btn', text: 'Add', type: 'submit' }
             ]);
+            eventHandler.addDialogButtonsEvents();
     }
 
     function openEditListDialog(title) {
@@ -65,6 +71,7 @@ const dialog = (() => {
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
                 { id: 'dialog-edit-btn', text: 'Edit', type: 'submit' }
             ]);
+            eventHandler.addDialogButtonsEvents();
     }
 
     function closeDialog() {

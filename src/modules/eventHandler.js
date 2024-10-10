@@ -2,6 +2,7 @@ import activeTab from './tabHandler.js';
 import todo from './todo.js';
 import dialog from './dialog.js';
 import lists from './list.js';
+import { add } from 'date-fns';
 
 const eventHandler = (() => {
 // Add event listener to tabswitching buttons
@@ -24,20 +25,6 @@ const eventHandler = (() => {
             });
         });
     }
-
-    // function addToggleCompleteEvent() {
-    //     //const todoCheckbox = document.querySelector('#todo-checkbox');
-    //     const todoCard = document.querySelectorAll('.todo-card');
-    //     todoCard.forEach((card) => {
-    //         card.addEventListener('click', (e) => {
-    //         if (e.target.id === 'todo-checkbox' || e.target.class === 'todo-title') {
-    //             const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
-    //             const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
-    //             todo.toggleComplete(listIndex, todoIndex, activeTab.getActiveTab());
-    //         }
-    //         });
-    //     });
-    // }
 
     function addStaticDialogButtonsEvents() {
         const dialogButtons = document.querySelectorAll('.add-btn');
@@ -89,6 +76,25 @@ const eventHandler = (() => {
         });
     }
 
+    function addDialogButtonsEvents(){
+        // Add event listener to buttons inside different dialogs
+        const dialog = document.querySelector('dialog');
+        dialog.addEventListener('click', (e) => {
+            if (e.target.id === 'dialog-cancel-btn') {
+                dialog.close();
+            } else if (e.target.id === 'dialog-add-btn') {
+                todo.addTodo();
+                dialog.close();
+            } else if (e.target.id === 'dialog-edit-btn') {
+                todo.editTodo();
+                dialog.close();
+            } else if (e.target.id === 'dialog-add-list-btn') {
+                lists.addList(document.querySelector('#list-title').value);
+                dialog.close();
+            }
+        });
+    }
+
     function addStaticElementsEvents(){
         addTabSwitchingEvent();
         addStaticDialogButtonsEvents();
@@ -96,7 +102,8 @@ const eventHandler = (() => {
 
     return {
         addTodoCardElementsEvents,
-        addStaticElementsEvents
+        addStaticElementsEvents,
+        addDialogButtonsEvents,
     };
 
 })();
