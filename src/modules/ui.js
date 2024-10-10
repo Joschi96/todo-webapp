@@ -2,6 +2,7 @@ import {format, parseISO, differenceInDays } from 'date-fns';
 import lists from './list';
 import todos from './todo';
 import eventHandler from './eventHandler';
+import activeTab from './tabHandler';
 
 const dom = (() => {
 
@@ -27,6 +28,11 @@ const dom = (() => {
             }
             listsContainer.appendChild(listCard);
         });
+        eventHandler.addListCardElementsEvents();
+        // if active tab is on a list that has been deleted, set active tab to 'all'
+        if (activeTab.getActiveTab() !== 'all' && !lists.listsArray.find(list => list.title === activeTab.getActiveTab())){
+            activeTab.setActiveTab('all');
+        }
     }
 
     function showTodos(tab) {

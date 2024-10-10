@@ -8,20 +8,9 @@ const eventHandler = (() => {
 // Add event listener to tabswitching buttons
     function addTabSwitchingEvent() {
         const filterTabs = document.querySelectorAll('.nav-btn');
-        const listCards = document.querySelectorAll('.list-card');
         filterTabs.forEach((tab) => {
             tab.addEventListener('click', () => {
                 activeTab.setActiveTab(tab.getAttribute('data-title'));
-            });
-        });
-        listCards.forEach((card) => {
-            card.addEventListener('click', () => {
-                const listNameElement = card.querySelector('.list-name');
-                const listNameText = Array.from(listNameElement.childNodes)
-                    .filter(node => node.nodeType === Node.TEXT_NODE)
-                    .map(node => node.textContent.trim())
-                    .join(' ');
-                activeTab.setActiveTab(listNameText);
             });
         });
     }
@@ -76,21 +65,66 @@ const eventHandler = (() => {
         });
     }
 
+    function addListCardElementsEvents() {
+        const listCards = document.querySelectorAll('.list-card');
+        listCards.forEach((card) => {
+            card.addEventListener('click', (e) => {
+                const targetButton = e.target.closest('button') || (e.target.classList.contains('material-symbols-rounded') ? e.target : null);
+                if (targetButton && targetButton.id === 'edit-btn') {
+                    const listIndex = e.target.closest('.list-card').getAttribute('data-index');
+                    dialog.openEditListDialog(lists.listsArray[listIndex].title);
+                    // Store the list index in the dialog for later use
+                    dialog.setListIndex(listIndex);
+                } else if (targetButton && targetButton.id === 'delete-btn') {
+                    const listIndex = e.target.closest('.list-card').getAttribute('data-index');
+                    lists.deleteList(listIndex);
+                } else {
+                    const listCard = e.target.closest('.list-card');
+                    if (listCard) {
+                        const listNameElement = listCard.querySelector('.list-name');
+                        if (listNameElement) {
+                            const listNameText = Array.from(listNameElement.childNodes)
+                                .filter(node => node.nodeType === Node.TEXT_NODE)
+                                .map(node => node.textContent.trim())
+                                .join(' ')
+                                .trim(); // Trim any leading or trailing whitespace
+                            activeTab.setActiveTab(listNameText);
+                        }
+                    }
+                }
+            });
+        });
+    }
+
     function addDialogButtonsEvents(){
         // Add event listener to buttons inside different dialogs
         const dialog = document.querySelector('dialog');
-        dialog.addEventListener('click', (e) => {
+        
+        // Clone the dialog element to remove all existing event listeners
+        const newDialog = dialog.cloneNode(true);
+        dialog.parentNode.replaceChild(newDialog, dialog);
+
+        newDialog.addEventListener('click', (e) => {
             if (e.target.id === 'dialog-cancel-btn') {
-                dialog.close();
+                newDialog.close();
             } else if (e.target.id === 'dialog-add-btn') {
                 todo.addTodo();
-                dialog.close();
+                newDialog.close();
             } else if (e.target.id === 'dialog-edit-btn') {
                 todo.editTodo();
-                dialog.close();
+                newDialog.close();
+            } else if (e.target.id === 'dialog-edit-list-btn') {
+                const listIndex = newDialog.getAttribute('data-list-index');
+                if (listIndex !== null) {
+                    lists.editListTitle(
+                        listIndex,
+                        document.querySelector('#list-title').value
+                    );
+                }
+                newDialog.close();
             } else if (e.target.id === 'dialog-add-list-btn') {
                 lists.addList(document.querySelector('#list-title').value);
-                dialog.close();
+                newDialog.close();
             }
         });
     }
@@ -104,6 +138,7 @@ const eventHandler = (() => {
         addTodoCardElementsEvents,
         addStaticElementsEvents,
         addDialogButtonsEvents,
+        addListCardElementsEvents,
     };
 
 })();

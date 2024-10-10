@@ -14,6 +14,11 @@ const dialog = (() => {
         dialog.showModal();
     }
 
+    function setListIndex(listIndex) {
+        const dialog = document.querySelector('dialog');
+        dialog.setAttribute('data-list-index', listIndex);
+    }
+
     function openAddTodoDialog() {
         openDialog('Add todo',
             `<input type="text" id="todo-title" placeholder="Title">
@@ -69,7 +74,7 @@ const dialog = (() => {
             `<input type="text" id="list-title" value="${title}">`,
             [
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
-                { id: 'dialog-edit-btn', text: 'Edit', type: 'submit' }
+                { id: 'dialog-edit-list-btn', text: 'Edit', type: 'submit' }
             ]);
             eventHandler.addDialogButtonsEvents();
     }
@@ -85,7 +90,8 @@ const dialog = (() => {
         openShowDetailsDialog,
         openAddListDialog,
         openEditListDialog,
-        closeDialog
+        closeDialog,
+        setListIndex,
     };
 })();
 
