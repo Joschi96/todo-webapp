@@ -57,9 +57,13 @@ const lists = (() => {
   function deleteList(listIndex) {
     if (listIndex > -1) {
       listsArray.splice(listIndex, 1);
+    
+    for (let i = listIndex; i < listsArray.length; i++) {
+      listsArray[i].listIndex = i;
     }
     saveData('lists', listsArray);
     dom.showLists();
+    }
   }
 
   function editListTitle(listIndex, title) {

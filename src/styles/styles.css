@@ -7,11 +7,15 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   display: grid;
   grid-template-columns: 250px auto;
-  grid-template-rows: auto auto;
+  grid-template-rows: max-content auto;
   grid-template-areas:
     "header header"
     "nav main";
@@ -30,42 +34,28 @@ header {
   grid-area: header;
   align-items: center;
   gap: 0.5rem;
+  height: max-content;
 }
 
 nav {
   display: flex;
   flex-direction: column;
   grid-area: nav;
+  padding: 1rem 1rem;
+  gap: 2rem;
+  height: 100%;
+}
+
+.impressum {
+  margin-top: auto;
+  justify-self: end;
 }
 
 .main-content {
   grid-area: main;
-  padding: 1rem 12rem;
-}
-
-.nav-btn-group {
+  padding: 2rem 8rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 2rem;
 }
 
-.todo-card {
-  background-color: #f8f8f8;
-  display: flex;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.todo-card-title-container {
-  display: flex;
-  align-items: center;
-}
-
-.main-content-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5rem 3rem;
-}
