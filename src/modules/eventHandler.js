@@ -37,7 +37,10 @@ const eventHandler = (() => {
                     const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
                     const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
                     const todo = lists.listsArray[listIndex].todos[todoIndex];
-                    dialog.openEditTodoDialog(todo.title, todo.description, todo.dueDate, todo.listIndex,todo.important);
+                    dialog.openEditTodoDialog(todo.title, todo.description, todo.dueDate, todo.listIndex, todo.important);
+                    // Set the data-index attribute on the dialog for later use
+                    const dialogElement = document.querySelector('dialog');
+                    dialogElement.setAttribute('data-index', todoIndex);
                 } else if (targetButton && targetButton.id === 'delete-btn') {
                     const todoIndex = e.target.closest('.todo-card').getAttribute('data-index');
                     const listIndex = e.target.closest('.todo-card').getAttribute('data-list-index');
