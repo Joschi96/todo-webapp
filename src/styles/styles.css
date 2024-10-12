@@ -20,6 +20,7 @@ body {
     "header header"
     "nav main";
   height: 100%;
+  color: #030705;
 }
 
 button {
@@ -27,7 +28,7 @@ button {
 }
 
 header {
-  background-color: #f8f8f8;
+  background-color: #7ca4cc;
   padding: 1rem;
   display: flex;
   font-size: 16px;
@@ -57,5 +58,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  background-color: #fbfdfc;
+  height: 100%;
 }
 
