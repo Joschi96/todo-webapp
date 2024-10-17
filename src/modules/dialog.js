@@ -22,15 +22,24 @@ const dialog = (() => {
 
     function openAddTodoDialog() {
         openDialog('Add todo',
-            `<input type="text" id="todo-title" placeholder="Title">
+            `
+            <input type="text" id="todo-title" placeholder="Title">
             <textarea id="todo-description" placeholder="Description"></textarea>
-            <input type="date" id="todo-due-date">
-            <label for="todo-list">List:</label>
-            <select id="todo-list">
-                ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
-            </select>
-            <input type="checkbox" id="todo-important">
-            <label for="todo-important">Important</label>`,
+            <div class="todo-due-date">    
+                <label for="todo-due-date">Due Date:</label>
+                <input type="date" id="todo-due-date">
+            </div>
+            <div class="todo-list-container">
+                <label for="todo-list">List:</label>
+                <select id="todo-list">
+                    ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
+                </select>
+            </div>
+            <div class="important-checkbox">
+                <input type="checkbox" id="todo-important">
+                <label for="todo-important">Important</label>
+            </div>
+            `,
             [
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
                 { id: 'dialog-add-btn', text: 'Add', type: 'submit' }
@@ -43,12 +52,17 @@ const dialog = (() => {
             `<input type="text" id="todo-title" value="${title}">
             <textarea id="todo-description" >${description}</textarea>
             <input type="date" id="todo-due-date" value="${dueDate}">
-            <label for="todo-list">List:</label>
-            <select id="todo-list">
-                ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
-            </select>
-            <input type="checkbox" id="todo-important" ${important ? 'checked' : ''}>
-            <label for="todo-important">Important</label>`,
+            <div class="todo-list-container">
+                <label for="todo-list">List:</label>
+                <select id="todo-list">
+                    ${lists.listsArray.map((list, index) => `<option value="${index}">${list.title}</option>`).join('')}
+                </select>
+            </div>
+            <div class="important-checkbox">
+                <input type="checkbox" id="todo-important" ${important ? 'checked' : ''}>
+                <label for="todo-important">Important</label>
+            </div>
+            `,
             [
                 { id: 'dialog-cancel-btn', text: 'Cancel', type: 'button' },
                 { id: 'dialog-edit-btn', text: 'Edit', type: 'submit' }
@@ -58,8 +72,15 @@ const dialog = (() => {
 
     function openShowDetailsDialog(title, description, dueDate, important) {
         openDialog('Details',
-            `<p>Title: ${title}</p>
-            <p>Description: ${description}</p>
+            `
+            <div class="dialog-title-container">
+                <p>Title:</p>
+                <p>${title}</p>
+            </div>
+            <div class="dialog-description-container">
+                <p>Description:</p>
+                <p>${description}</p>
+            </div>
             <p>Due Date: ${dueDate}</p>
             <p>${important ? 'Important' : ''}`,
             [
